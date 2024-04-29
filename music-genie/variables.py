@@ -6,8 +6,9 @@ from mlflow.tracking.client import MlflowClient
 
 # COMMAND ----------
 
-catalog = "music_genie"
-schema = "music_genie_db"
+# define catalog and schema
+catalog_name = "music_genie"
+schema_name = "music_genie_db"
 
 # name for the LLM and endpoint that will label text with emotions
 labeler_model_name = "music_genie_langchain_model"
@@ -21,8 +22,7 @@ embedding_index = "song_lyrics_emotions_embeddings_index"
 
 # COMMAND ----------
 
-print(f'''You are using the following Unity Catalog location:\nCatalog: {catalog}\nSchema: {schema}\n\n
-      To change the location, update the variables in variables.py.''')
+print(f'''You are using the following Unity Catalog location:\nCatalog: {catalog_name}\nSchema: {schema_name}\n\nTo change the location, update the variables in variables.py.''')
 
 # COMMAND ----------
 

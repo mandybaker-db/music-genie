@@ -19,12 +19,23 @@ import os
 
 # COMMAND ----------
 
-# MAGIC %sql
-# MAGIC -- create catalog catalog_name;
-# MAGIC -- create scheme schema_name;
-# MAGIC use catalog music_genie;
-# MAGIC use schema music_genie_db;
-# MAGIC create volume if not exists kaggle_datasets;
+# MAGIC %run ./variables
+
+# COMMAND ----------
+
+# %sql
+# -- create catalog if not exists catalog_name;
+# -- create schema if not exists catalog_name.schema_name;
+
+# -- use catalog music_genie;
+# -- use schema music_genie_db;
+# -- create volume if not exists kaggle_datasets;
+
+spark.sql(f'''create catalog if not exists {catalog_name};
+              create schema if not exists {catalog_name}.{schema_name};
+              use catalog {catalog_name};
+              use schema {schema_name};
+              create volume if not exists kaggle_datasets;''')
 
 # COMMAND ----------
 
@@ -110,8 +121,8 @@ display(df.filter(col("text").isNotNull()).limit(200))
 
 # COMMAND ----------
 
-# downsampling to about 5000 songs
-sampled_df = df.sample(withReplacement=False, fraction=0.1)
+# downsampling to about 10,000 songs
+sampled_df = df.sample(withReplacement=False, fraction=0.2)
 
 # COMMAND ----------
 
